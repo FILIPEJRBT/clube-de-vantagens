@@ -1,0 +1,75 @@
+# Painel de administração do Clube de Vantagens FJ Beach Tennis
+backend:
+  name: github
+  repo: FILIPEJRBT/clube-de-vantagens
+  branch: main
+  commit_messages:
+    update: "Painel: atualiza {{slug}}"
+
+site_url: https://fjbeachtenis.com.br
+display_url: https://fjbeachtenis.com.br
+media_folder: assets/img/uploads
+public_folder: assets/img/uploads
+
+collections:
+  - name: clube
+    label: Clube de Vantagens
+    editor: { preview: false }
+    files:
+      - name: parceiros
+        label: Parceiros
+        file: dados/parceiros.json
+        fields:
+          - name: parceiros
+            label: Parceiros
+            label_singular: Parceiro
+            widget: list
+            summary: "{{fields.nome}} · {{fields.categoria}}"
+            fields:
+              - { name: nome, label: Nome da empresa, widget: string }
+              - name: categoria
+                label: Categoria
+                widget: relation
+                collection: clube
+                file: categorias
+                value_field: "categorias.*.id"
+                search_fields: ["categorias.*.nome"]
+                display_fields: ["categorias.*.nome"]
+              - { name: descricao, label: Descrição curta, widget: string, required: false }
+              - { name: beneficio, label: "Desconto (ex.: 10%) — vazio = a combinar", widget: string, required: false }
+              - { name: responsavel, label: Nome do contato, widget: string, required: false }
+              - name: whatsapp
+                label: WhatsApp
+                label_singular: Número
+                widget: list
+                required: false
+                field: { name: numero, label: "Número com DDD, ex.: (47) 99101-1123", widget: string }
+              - { name: link, label: "Site ou Instagram (opcional)", widget: string, required: false }
+              - { name: ativo, label: Aparece no site, widget: boolean, default: true }
+
+      - name: categorias
+        label: Categorias
+        file: dados/categorias.json
+        fields:
+          - name: categorias
+            label: Categorias
+            label_singular: Categoria
+            widget: list
+            summary: "{{fields.nome}}"
+            fields:
+              - { name: id, label: "Código (sem espaço nem acento, ex.: pets)", widget: string }
+              - { name: nome, label: Nome que aparece no site, widget: string }
+              - { name: icone, label: "Ícone (avançado — pode deixar vazio)", widget: string, required: false }
+
+      - name: galeria
+        label: Galeria de fotos
+        file: dados/galeria.json
+        fields:
+          - name: fotos
+            label: Fotos
+            label_singular: Foto
+            widget: list
+            summary: "{{fields.legenda}}"
+            fields:
+              - { name: src, label: Foto, widget: image }
+              - { name: legenda, label: Legenda, widget: string }
