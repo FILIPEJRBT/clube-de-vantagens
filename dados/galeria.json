@@ -1,0 +1,44 @@
+{
+  "fotos": [
+    {
+      "src": "assets/img/foto-01.jpg",
+      "legenda": "Saque"
+    },
+    {
+      "src": "assets/img/foto-02.jpg",
+      "legenda": "Jogo noturno"
+    },
+    {
+      "src": "assets/img/foto-03.jpg",
+      "legenda": "Ponto!"
+    },
+    {
+      "src": "assets/img/foto-04.jpg",
+      "legenda": "Smash"
+    },
+    {
+      "src": "assets/img/foto-05.jpg",
+      "legenda": "Dupla"
+    },
+    {
+      "src": "assets/img/foto-06.jpg",
+      "legenda": "Com torcida"
+    },
+    {
+      "src": "assets/img/foto-07.jpg",
+      "legenda": "Foco"
+    },
+    {
+      "src": "assets/img/foto-08.jpg",
+      "legenda": "Dupla mista"
+    },
+    {
+      "src": "assets/img/foto-09.jpg",
+      "legenda": "Na rede"
+    },
+    {
+      "src": "assets/img/foto-10.jpg",
+      "legenda": "Saque por cima"
+    }
+  ]
+}

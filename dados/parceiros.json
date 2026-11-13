@@ -1,0 +1,214 @@
+{
+  "parceiros": [
+    {
+      "nome": "Al Limone Cafeteria Italiana",
+      "categoria": "gastronomia",
+      "descricao": "Cafeteria italiana.",
+      "beneficio": "10%",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Doki Sorvetes",
+      "categoria": "gastronomia",
+      "descricao": "Sorvetes para refrescar depois do jogo.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Sany Doces e Salgados",
+      "categoria": "gastronomia",
+      "descricao": "Doces e salgados.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Mercado Lopes",
+      "categoria": "gastronomia",
+      "descricao": "Mercado.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Bem Estar Implantes",
+      "categoria": "saude",
+      "descricao": "Implantes dentários.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Dentista",
+      "categoria": "saude",
+      "descricao": "Atendimento odontológico.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Personal Trainer",
+      "categoria": "saude",
+      "descricao": "Treino personalizado.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "PrevSaúde",
+      "categoria": "saude",
+      "descricao": "Saúde.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "CLV Arquitetura",
+      "categoria": "casa",
+      "descricao": "Projetos de arquitetura.",
+      "beneficio": "",
+      "responsavel": "Carla",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Material de Construção",
+      "categoria": "casa",
+      "descricao": "Materiais para obra e reforma.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Corretora de Alto Padrão",
+      "categoria": "casa",
+      "descricao": "Imóveis de alto padrão.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Zenato Cell",
+      "categoria": "compras",
+      "descricao": "Celulares e acessórios.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Askem Bolsas de Couro",
+      "categoria": "compras",
+      "descricao": "Bolsas de couro.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Magalu",
+      "categoria": "compras",
+      "descricao": "Atendimento Magalu com vendedor parceiro.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Rei do Carvão",
+      "categoria": "compras",
+      "descricao": "Carvão para o churrasco.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "HB Proteção Financeira",
+      "categoria": "financas",
+      "descricao": "Proteção financeira e seguro de vida.",
+      "beneficio": "",
+      "responsavel": "Henrique",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Consórcio Ademicon",
+      "categoria": "financas",
+      "descricao": "Consórcio.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Inovação Ferramentaria",
+      "categoria": "negocios",
+      "descricao": "Ferramentaria e moldes.",
+      "beneficio": "10%",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Projetos Mecânicos 3D",
+      "categoria": "negocios",
+      "descricao": "Projetos mecânicos em 3D.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Panspar Business",
+      "categoria": "negocios",
+      "descricao": "Negócios.",
+      "beneficio": "",
+      "responsavel": "Leandro",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    },
+    {
+      "nome": "Khronos",
+      "categoria": "negocios",
+      "descricao": "Parceiro do clube.",
+      "beneficio": "",
+      "responsavel": "",
+      "whatsapp": [],
+      "link": "",
+      "ativo": true
+    }
+  ]
+}

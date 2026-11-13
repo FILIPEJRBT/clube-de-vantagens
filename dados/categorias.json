@@ -1,0 +1,34 @@
+{
+  "categorias": [
+    {
+      "id": "gastronomia",
+      "nome": "Gastronomia",
+      "icone": "M5 9h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"
+    },
+    {
+      "id": "saude",
+      "nome": "Saúde e movimento",
+      "icone": "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.600-7 10-7 10z"
+    },
+    {
+      "id": "casa",
+      "nome": "Casa e imóveis",
+      "icone": "M4 11l8-7 8 7v9H4zM10 20v-6h4v6"
+    },
+    {
+      "id": "compras",
+      "nome": "Compras",
+      "icone": "M6 8h12l1 12H5zM9 8V6a3 3 0 0 1 6 0v2"
+    },
+    {
+      "id": "financas",
+      "nome": "Finanças e seguros",
+      "icone": "M12 3l7 3v6c0 4.500-3 7.500-7 9-4-1.500-7-4.500-7-9V6z"
+    },
+    {
+      "id": "negocios",
+      "nome": "Indústria e negócios",
+      "icone": "M4 8h16v11H4zM9 8V5h6v3M4 13h16"
+    }
+  ]
+}
