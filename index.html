@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clube de Vantagens FJ Beach Tennis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: quadra de beach tennis. Topo preto da marca, rede como divisória, areia embaixo,
+   parceiros como cupons destacáveis. Um único tema, por escolha da marca (preto e branco + bola laranja). */
+:root{
+  color-scheme: light;
+  --ink:#141213;          /* preto do logo */
+  --ink-soft:#2a2627;
+  --paper:#fbf6ea;        /* cupom */
+  --sand:#efe3cc;         /* areia */
+  --sand-deep:#dfcba6;    /* areia molhada */
+  --ball:#f26a1b;         /* bola de beach tennis */
+  --sea:#0e5e6f;          /* fita da quadra */
+  --muted:#6a6056;
+  --line:rgba(20,18,19,.16);
+  --display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  --body:"Barlow","Segoe UI",system-ui,sans-serif;
+  --wrap:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ball);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+.display{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;line-height:.92;letter-spacing:-.005em;text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.95rem;margin:0}
+
+/* ---------- Topo ---------- */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:32px;align-items:center;padding-top:44px;padding-bottom:86px}
+.hero .eyebrow{color:var(--ball)}
+.hero h1{font-size:clamp(3.2rem,9.4vw,7rem);margin-top:14px}
+.hero h1 em{font-style:inherit;color:var(--ball)}
+.hero p.lead{max-width:34rem;font-size:1.12rem;color:#e9e3d6;margin:22px 0 0}
+.hero-logo{justify-self:center;width:min(100%,300px);color:#fff}
+.hero-logo svg{display:block;width:100%;height:auto}
+.placar{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0;padding:0;list-style:none}
+.placar li{border:1.5px solid rgba(255,255,255,.28);border-radius:10px;padding:8px 16px 10px;min-width:118px}
+.placar b{display:block;font-family:var(--display);font-style:italic;font-weight:800;font-size:2.5rem;line-height:1;font-variant-numeric:tabular-nums}
+.placar span{font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;color:#cfc8ba}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;background:var(--ball);color:var(--ink);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:1.15rem;padding:13px 24px;border-radius:999px;text-decoration:none;transition:transform .15s}
+.hero-cta:hover{transform:translateY(-2px)}
+
+/* Rede: divisória entre o topo e a areia */
+.rede{position:absolute;left:0;right:0;bottom:0;height:44px;
+  background:
+    linear-gradient(#fff,#fff) top/100% 7px no-repeat,
+    repeating-linear-gradient(45deg,rgba(255,255,255,.34) 0 1.5px,transparent 1.5px 11px),
+    repeating-linear-gradient(-45deg,rgba(255,255,255,.34) 0 1.5px,transparent 1.5px 11px),
+    var(--sea)}
+.bola-x{position:absolute;bottom:0;left:0;width:100%;pointer-events:none;animation:bolaX 2.6s cubic-bezier(.3,.5,.5,1) both paused}
+.bola{display:block;width:26px;height:26px;border-radius:50%;margin-left:calc(100% - 60px);
+  background:radial-gradient(circle at 34% 30%,#ffa35e,var(--ball) 58%,#c9500c);
+  box-shadow:inset -3px -4px 0 rgba(0,0,0,.14);animation:bolaY 2.6s both paused}
+.convite.viu .bola-x,.convite.viu .bola{animation-play-state:running}
+@keyframes bolaX{from{transform:translateX(-70%)}to{transform:translateX(0)}}
+@keyframes bolaY{
+  0%{transform:translateY(-240px);animation-timing-function:cubic-bezier(.5,0,1,.6)}
+  34%{transform:translateY(0);animation-timing-function:cubic-bezier(0,.5,.5,1)}
+  54%{transform:translateY(-110px);animation-timing-function:cubic-bezier(.5,0,1,.6)}
+  72%{transform:translateY(0);animation-timing-function:cubic-bezier(0,.5,.5,1)}
+  84%{transform:translateY(-38px);animation-timing-function:cubic-bezier(.5,0,1,.6)}
+  100%{transform:translateY(0)}
+}
+
+/* ---------- Como funciona ---------- */
+.passos{padding:54px 0 12px}
+.passos ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:p}
+.passos li{counter-increment:p;border-top:3px solid var(--ink);padding-top:14px}
+.passos li::before{content:counter(p);font-family:var(--display);font-style:italic;font-weight:800;font-size:1.1rem;background:var(--ink);color:#fff;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;margin-right:10px;vertical-align:4px}
+.passos h3{display:inline;font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:1.7rem;margin:0}
+.passos p{margin:8px 0 0;color:var(--ink-soft);max-width:30rem}
+
+/* ---------- Parceiros ---------- */
+.parceiros{padding:46px 0 30px}
+.sec-head{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+.sec-head h2{font-size:clamp(2.4rem,6vw,4rem)}
+.busca{position:relative;flex:1 1 260px;max-width:380px}
+.busca input{width:100%;padding:13px 16px 13px 44px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);font-size:1rem}
+.busca svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:19px;height:19px}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);background:transparent;border-radius:999px;padding:8px 15px;cursor:pointer;font-weight:600;font-size:.96rem;transition:background .15s,color .15s}
+.chip svg{width:18px;height:18px;flex:none}
+.chip small{font-variant-numeric:tabular-nums;font-weight:700;font-size:.8rem;opacity:.65}
+.chip:hover{background:var(--sand-deep)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+.chip[aria-pressed="true"] small{opacity:.8}
+.so-desconto{display:inline-flex;align-items:center;gap:9px;margin:8px 0 20px;cursor:pointer;font-weight:500}
+.so-desconto input{width:19px;height:19px;accent-color:var(--ball)}
+.contagem{color:var(--muted);font-size:.95rem;margin:0 0 14px}
+
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.cupom{display:grid;grid-template-columns:1fr 98px;background:var(--paper);border-radius:14px;min-height:172px;position:relative;box-shadow:0 1px 0 rgba(20,18,19,.12),0 10px 22px -16px rgba(20,18,19,.5);}
+.cupom:hover{box-shadow:0 1px 0 rgba(20,18,19,.12),0 18px 26px -16px rgba(20,18,19,.55)}
+.cupom-corpo{padding:16px 16px 14px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cupom .cat{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--sea)}
+.cupom .cat svg{width:15px;height:15px}
+.cupom h3{font-family:var(--display);font-weight:700;font-size:1.62rem;line-height:1.02;text-transform:uppercase;margin:0;overflow-wrap:anywhere}
+.cupom p{margin:0;color:var(--muted);font-size:.95rem}
+.cupom-acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:10px}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 14px;font-weight:600;font-size:.92rem;text-decoration:none;cursor:pointer;border:2px solid var(--ink);background:transparent}
+.btn svg{width:16px;height:16px}
+.btn.cheio{background:var(--ink);color:#fff}
+.btn.cheio:hover{background:var(--ink-soft)}
+.btn:hover{background:var(--sand)}
+.btn.grande{padding:12px 20px;font-size:1rem}
+/* canhoto do cupom com picote */
+.canhoto{border-left:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px 8px;position:relative;border-radius:0 14px 14px 0}
+.canhoto::before,.canhoto::after{content:"";position:absolute;left:-10px;width:18px;height:18px;border-radius:50%;background:var(--sand)}
+.canhoto::before{top:-9px}.canhoto::after{bottom:-9px}
+.canhoto b{font-family:var(--display);font-style:italic;font-weight:800;font-size:2.7rem;line-height:.9}
+.canhoto span{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:4px}
+.cupom.tem-desconto .canhoto{background:var(--ball)}
+.cupom:not(.tem-desconto) .canhoto b{font-size:1.5rem;color:var(--muted)}
+.cupom:not(.tem-desconto) .canhoto span{color:var(--muted)}
+.vazio{grid-column:1/-1;background:var(--paper);border-radius:14px;padding:28px;text-align:center;color:var(--muted)}
+
+/* ---------- Carteirinha ---------- */
+.carteira{padding:40px 0}
+.carteira .wrap{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.carteira h2{font-size:clamp(2.2rem,5.2vw,3.4rem)}
+.carteira p{max-width:30rem;color:var(--ink-soft)}
+.campo label{display:block;font-weight:600;margin-bottom:6px}
+.campo input{width:100%;max-width:360px;padding:13px 16px;border:2px solid var(--ink);border-radius:12px;background:var(--paper);font-size:1.05rem}
+.cartao{background:var(--ink);color:#fff;border-radius:20px;aspect-ratio:1.586;max-width:440px;width:100%;justify-self:center;padding:22px 24px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;position:relative;overflow:hidden;box-shadow:0 26px 40px -24px rgba(20,18,19,.8);transform:rotate(-2deg)}
+.cartao::after{content:"";position:absolute;right:-60px;bottom:-60px;width:190px;height:190px;border-radius:50%;background:var(--ball);opacity:.95}
+.cartao .eyebrow{color:var(--ball);font-size:.85rem}
+.cartao .logo{grid-row:1/3;grid-column:2;width:62px;color:#fff;position:relative;z-index:1}
+.cartao .nome{grid-column:1/-1;align-self:end;font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(1.6rem,5vw,2.3rem);line-height:1;overflow-wrap:anywhere;position:relative;z-index:1;max-width:78%}
+.cartao .rodape{grid-column:1/-1;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#cfc8ba;margin-top:8px;position:relative;z-index:1}
+
+/* ---------- Seja parceiro + rodapé ---------- */
+.convite{background:var(--sea);color:#fff;margin-top:34px}
+.convite .wrap{padding-top:44px;padding-bottom:44px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between}
+.convite h2{font-size:clamp(2rem,5vw,3.2rem)}
+.convite p{margin:0;max-width:30rem;color:#dcebee}
+footer{background:var(--ink);color:#cfc8ba;font-size:.88rem}
+footer .wrap{padding-top:22px;padding-bottom:26px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+/* ---------- Janela do parceiro ---------- */
+dialog{border:0;border-radius:18px;padding:0;background:var(--paper);color:var(--ink);width:min(520px,calc(100% - 32px));box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(20,18,19,.62)}
+.dlg-topo{background:var(--ink);color:#fff;padding:22px 24px 20px;position:relative}
+.dlg-topo .cat{color:var(--ball);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.dlg-topo h3{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:2.3rem;line-height:.98;margin:6px 40px 0 0;overflow-wrap:anywhere}
+.fechar{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;font-size:1.2rem;line-height:1}
+.dlg-corpo{padding:20px 24px 24px;display:flex;flex-direction:column;gap:16px}
+.dlg-corpo p{margin:0}
+.selo{display:flex;align-items:center;gap:14px;border:2px dashed var(--ink);border-radius:12px;padding:12px 16px}
+.selo b{font-family:var(--display);font-style:italic;font-weight:800;font-size:2.6rem;line-height:1}
+.selo.on{background:var(--ball);border-style:solid}
+.contatos{display:flex;flex-direction:column;gap:10px}
+.contato{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.contato .num{font-variant-numeric:tabular-nums;font-weight:600}
+.msg{background:var(--sand);border-radius:12px;padding:12px 14px;font-size:.95rem}
+.msg small{display:block;text-transform:uppercase;letter-spacing:.1em;font-weight:700;font-size:.72rem;color:var(--muted);margin-bottom:4px}
+.dlg-rodape{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.aviso{font-size:.88rem;color:var(--muted)}
+
+
+/* ---------- Movimento ---------- */
+#areia{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+.hero{z-index:1;cursor:crosshair;touch-action:manipulation}
+.hero a{cursor:pointer}
+#cena{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;z-index:1}
+.rede{z-index:2}
+.dica{position:absolute;right:20px;bottom:54px;margin:0;z-index:1;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#a8a092;pointer-events:none;transition:opacity .4s}
+.convite{position:relative;overflow:hidden}
+.convite .wrap{position:relative;z-index:1}
+
+.progresso{position:fixed;top:0;left:0;right:0;height:5px;z-index:60;pointer-events:none;background:rgba(120,110,100,.25)}
+.progresso i{position:absolute;inset:0;background:var(--ball);transform-origin:left;transform:scaleX(0)}
+.progresso span{position:absolute;top:-2px;left:0;width:18px;height:18px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#ffa35e,var(--ball) 60%,#c9500c);box-shadow:0 2px 6px rgba(0,0,0,.35);overflow:hidden}
+.progresso span::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid transparent;border-left-color:rgba(255,255,255,.85);transform:translateX(7px)}
+
+.ln{display:block;overflow:hidden;padding:.06em .12em 0 0;margin-right:-.12em}
+.ln>span{display:block;animation:sobeLinha .7s cubic-bezier(.2,.8,.2,1) backwards}
+.ln:nth-child(2)>span{animation-delay:.09s}.ln:nth-child(3)>span{animation-delay:.18s}.ln:nth-child(4)>span{animation-delay:.27s}
+@keyframes sobeLinha{from{transform:translateY(105%) skewY(4deg)}}
+.hero .eyebrow,.hero .lead,.placar,.hero-cta{animation:surge .7s .35s backwards}
+.placar{animation-delay:.48s}.hero-cta{animation-delay:.6s}
+@keyframes surge{from{opacity:0;transform:translateY(16px)}}
+.hero-logo{transform:translateY(calc(var(--sy,0) * .22px))}
+.hero-logo svg{overflow:visible;animation:flutua 6s ease-in-out infinite}
+@keyframes flutua{50%{transform:translateY(-10px) rotate(-1.2deg)}}
+.hero-cta svg{animation:pinga 1.6s ease-in-out infinite}
+@keyframes pinga{50%{transform:translateY(4px)}}
+
+.rev{opacity:0;transform:translateY(30px)}
+.rev.in{opacity:1;transform:none;transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0) * 90ms)}
+
+.grade{perspective:1100px}
+.cupom{animation:entra .5s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * 40ms);
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));transition:transform .2s,box-shadow .18s}
+.cupom:hover{--ty:-4px}
+@keyframes entra{from{opacity:0;transform:translateY(22px) rotate(-1.5deg) scale(.96)}}
+.cupom.tem-desconto .canhoto{overflow:hidden}
+.cupom.tem-desconto .canhoto::before,.cupom.tem-desconto .canhoto::after{display:none}
+.cupom.tem-desconto .canhoto i{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:brilho 3.6s ease-in-out infinite}
+.cupom.tem-desconto .canhoto b,.cupom.tem-desconto .canhoto span{position:relative}
+@keyframes brilho{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+.chip,.btn{transition:background .15s,color .15s,transform .12s}
+.chip:active,.btn:active{transform:scale(.95)}
+
+dialog[open]{animation:abre .32s cubic-bezier(.2,.9,.3,1.15)}
+dialog[open]::backdrop{animation:escurece .3s}
+@keyframes abre{from{opacity:0;transform:translateY(40px) scale(.94)}}
+@keyframes escurece{from{opacity:0}}
+dialog[open] .selo.on b{animation:carimbo .5s .18s cubic-bezier(.2,1.4,.4,1) backwards}
+@keyframes carimbo{from{opacity:0;transform:scale(2.6) rotate(-14deg)}}
+
+.carteira{perspective:1000px}
+.cartao{transform:rotate(-2deg) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s}
+.cartao::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.2),transparent 45%)}
+.cartao .logo{overflow:visible;height:auto}
+.cartao .nome.pulo{animation:pulo .25s}
+@keyframes pulo{50%{transform:scale(1.05)}}
+
+/* ---------- Vídeo e fotos ---------- */
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:translateY(calc(var(--sy,0) * .3px)) scale(calc(1.06 + var(--sy,0) * .00025));
+  filter:saturate(.85) contrast(1.06)}
+.hero-veu{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(20,18,19,.94) 0%,rgba(20,18,19,.74) 48%,rgba(20,18,19,.42) 100%),
+             linear-gradient(0deg,rgba(20,18,19,.85) 0%,transparent 38%)}
+
+.galeria{padding:40px 0 14px;overflow:hidden}
+.galeria-head{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+.galeria-head h2{font-size:clamp(2.2rem,5.4vw,3.6rem)}
+.galeria-head h2 em{font-style:inherit;color:var(--ball)}
+.galeria-head p{margin:0;color:var(--muted)}
+.trilho{overflow:hidden;padding:18px 0 26px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.fita{display:flex;gap:18px;width:max-content;will-change:transform;padding:0 20px}
+.foto{margin:0;flex:none;width:clamp(180px,21vw,260px);aspect-ratio:2/3;border-radius:16px;overflow:hidden;position:relative;cursor:zoom-in;
+  background:var(--sand-deep);border:6px solid var(--paper);box-shadow:0 16px 28px -18px rgba(20,18,19,.7);
+  transform:rotate(var(--r,0deg)) translateY(var(--o,0px));transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.foto:nth-child(odd){--r:-2deg;--o:8px}
+.foto:nth-child(even){--r:1.6deg;--o:-6px}
+.foto:hover,.foto:focus-visible{transform:rotate(0) translateY(-6px) scale(1.04);z-index:2}
+.foto img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.foto:hover img{transform:scale(1.08)}
+.foto figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;
+  background:linear-gradient(0deg,rgba(20,18,19,.85),transparent);color:#fff;
+  font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:1.25rem;line-height:1}
+
+.faixa{position:relative;height:clamp(300px,48vw,500px);overflow:hidden;background:var(--ink);margin:30px 0 0}
+.faixa img{position:absolute;left:0;top:-18%;width:100%;height:136%;object-fit:cover;will-change:transform;filter:saturate(.9)}
+.faixa::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,18,19,.82),rgba(20,18,19,.25) 70%)}
+.faixa-txt{position:relative;z-index:1;height:100%;display:flex;align-items:center}
+.faixa-txt p{color:#fff;font-size:clamp(2.4rem,7vw,5rem)}
+.faixa-txt em{font-style:inherit;color:var(--ball)}
+.faixa-txt p{opacity:0;transform:translateX(-40px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.faixa.viu .faixa-txt p{opacity:1;transform:none}
+
+.foto-dlg{width:min(560px,calc(100% - 32px));background:var(--ink);color:#fff;position:relative}
+.foto-dlg img{display:block;width:100%;max-height:78vh;object-fit:contain;background:#000}
+.foto-dlg p{margin:0;padding:12px 18px 16px;font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:1.5rem}
+.foto-dlg .fechar{background:rgba(20,18,19,.6)}
+
+@media (max-width:820px){
+  .hero .wrap{grid-template-columns:1fr;padding-top:30px}
+  .hero-logo{order:-1;width:120px;justify-self:start}
+  .passos ol{grid-template-columns:1fr}
+  .carteira .wrap{grid-template-columns:1fr}
+  .cartao{justify-self:start}
+}
+@media (max-width:400px){
+  .grade{grid-template-columns:1fr}
+  .cupom{grid-template-columns:1fr 84px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rev{opacity:1;transform:none}
+  .hero-logo{transform:none}
+  .dica{display:none}
+  .trilho{overflow-x:auto}
+  .faixa img{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="progresso" aria-hidden="true"><i id="prog-barra"></i><span id="prog-bola"></span></div>
+<canvas id="areia" aria-hidden="true"></canvas>
+
+<header class="hero" id="hero">
+  <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.jpg" aria-hidden="true"><source src="assets/video/hero.mp4" type="video/mp4"></video>
+  <div class="hero-veu" aria-hidden="true"></div>
+  <canvas id="cena" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Clube de Vantagens · Filipe Jr Beach Tennis</p>
+      <h1 class="display"><span class="ln"><span>Quem joga</span></span> <span class="ln"><span>na areia</span></span> <span class="ln"><span><em>ganha fora</em></span></span> <span class="ln"><span><em>dela.</em></span></span></h1>
+      <p class="lead">Descontos e condições especiais para alunos FJ em empresas de quem treina com você e em parceiros da região.</p>
+      <ul class="placar" aria-label="Números do clube">
+        <li><b id="n-parceiros">0</b><span>parceiros</span></li>
+        <li><b id="n-categorias">0</b><span>categorias</span></li>
+        <li><b id="n-descontos">0</b><span>descontos definidos</span></li>
+      </ul>
+      <a class="hero-cta" href="#parceiros">Ver parceiros
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </div>
+    <div class="hero-logo"><svg viewBox="256 4 620 1076" overflow="visible" role="img" aria-label="FJ Beach Tennis"><g fill="currentColor"><path d="M 286.375 566.625 C 286.378906 507.421875 286.675781 448.214844 286.195312 389.015625 C 286.054688 371.328125 291.828125 359.109375 307.09375 348.703125 C 456.382812 246.890625 605.214844 144.402344 754.160156 42.078125 C 762.246094 36.523438 770.207031 30.34375 780.636719 36.269531 C 790.667969 41.96875 790.839844 51.808594 790.816406 61.714844 C 790.738281 94.007812 790.074219 126.320312 791.015625 158.582031 C 791.492188 174.894531 785.871094 185.867188 772.472656 195.015625 C 681.421875 257.183594 590.675781 319.792969 499.839844 382.277344 C 477.6875 397.515625 455.496094 412.699219 433.476562 428.128906 C 422.769531 435.632812 417.292969 463.375 424.960938 473.429688 C 432.207031 482.925781 440.796875 479.792969 449.058594 474.007812 C 476.367188 454.878906 503.644531 435.703125 531.089844 416.773438 C 545.699219 406.695312 560.441406 396.78125 575.472656 387.355469 C 594.832031 375.21875 609.996094 382.988281 610.265625 405.492188 C 610.707031 442.082031 610.101562 478.6875 610.453125 515.28125 C 610.570312 527.636719 604.453125 535.023438 594.875 541.472656 C 551.148438 570.914062 507.957031 601.140625 466.25 633.40625 C 424.957031 665.347656 409.148438 717.988281 426.445312 764.652344 C 445.285156 815.484375 492.410156 846.902344 545.355469 843.9375 C 604.839844 840.601562 653.550781 790.660156 654.492188 730.921875 C 655.246094 683.03125 655.230469 635.117188 654.714844 587.222656 C 654.523438 569.726562 660.835938 558.125 676.097656 549.109375 C 703.398438 532.980469 729.511719 514.863281 756.519531 498.21875 C 776.542969 485.878906 790.550781 493.402344 790.640625 516.6875 C 790.925781 589.882812 792.460938 663.136719 790.207031 736.265625 C 786.402344 859.625 680.722656 969.234375 560.160156 977.796875 C 425.332031 987.375 313.507812 902.050781 289.273438 771.46875 C 284.796875 747.367188 286.679688 723.179688 286.480469 699.027344 C 286.113281 654.894531 286.375 610.757812 286.375 566.625 "/><path d="M 753.574219 373.351562 C 745.199219 359.5625 743.535156 344.625 746.792969 329.125 C 750.816406 310.015625 750.605469 309.488281 730.898438 307.726562 C 728.113281 307.476562 725.285156 307.691406 722.476562 307.691406 C 712.347656 307.269531 702.691406 309.566406 693.117188 312.667969 C 686.613281 314.78125 686 317.277344 690.925781 322.183594 C 703.828125 335.035156 710.183594 350.480469 707.4375 368.863281 C 705.957031 378.789062 702.144531 388.101562 698.417969 397.359375 C 693.859375 408.679688 689.671875 420.0625 687.9375 432.226562 C 685.351562 450.410156 694.886719 469.417969 710.457031 474.257812 C 726.339844 479.195312 742.253906 477.6875 756.253906 468.234375 C 778.097656 453.480469 783.5 423.390625 769.253906 398.871094 C 764.238281 390.242188 758.757812 381.886719 753.574219 373.351562 "/><path d="M 639.144531 402.710938 C 642.613281 432.183594 658.1875 453.816406 685.785156 467.28125 C 671.621094 439.296875 682.402344 414.132812 692.660156 388.863281 C 694.640625 383.984375 696.105469 378.867188 697.480469 373.769531 C 702.300781 355.855469 697.304688 340.832031 684.308594 327.84375 C 678.652344 322.191406 674.300781 322.5 668.476562 327.6875 C 645.890625 347.800781 635.621094 372.816406 639.144531 402.710938 "/><path d="M 780.960938 330.929688 C 775.339844 325.5 769.035156 316.027344 761.417969 319.5 C 753.898438 322.933594 755.058594 334.0625 754.640625 342.398438 C 753.894531 357.242188 760.523438 369.449219 768.765625 381 C 783.304688 401.378906 789.523438 423.1875 780.785156 447.753906 C 780.210938 449.367188 779.050781 451.207031 780.910156 453.582031 C 785.203125 451.625 787.855469 447.859375 790.539062 444.226562 C 817.164062 408.207031 813.371094 362.246094 780.960938 330.929688 "/><path transform="translate(613.3738 1049.6868)" d="M 10.0625 -15.515625 C 10.4375 -14.53125 10.015625 -13.546875 9.1875 -13.21875 L 6.8125 -12.3125 L -0.046875 -30.28125 L 0.015625 -30.3125 C 0.875 -29.8125 4.09375 -28.109375 5.546875 -27.359375 Z M 8.8125 -45.1875 C 8.78125 -45.234375 8.75 -45.3125 8.734375 -45.390625 L 5.6875 -53.375 C 4.671875 -56.015625 2.625 -57.921875 0.25 -58.578125 C -1.171875 -59.015625 -2.71875 -59 -4.125 -58.453125 L -18.65625 -52.921875 L 1.34375 -0.515625 L 15.875 -6.046875 C 16.578125 -6.328125 17.203125 -6.65625 17.8125 -7.140625 C 18.34375 -7.640625 18.8125 -8.15625 19.234375 -8.8125 C 20.5625 -10.875 20.828125 -13.671875 19.828125 -16.3125 L 14.40625 -30.5 C 14.21875 -31 14.03125 -31.484375 13.796875 -31.875 C 13.203125 -32.890625 12.46875 -33.65625 11.625 -34.34375 C 10.84375 -35.015625 9.9375 -35.484375 8.953125 -35.765625 C 8.359375 -35.921875 7.75 -36.03125 7.078125 -36.03125 C 7.59375 -36.453125 7.984375 -36.9375 8.296875 -37.46875 C 9.640625 -39.53125 9.890625 -42.328125 8.890625 -44.96875 C 8.859375 -45.03125 8.828125 -45.109375 8.8125 -45.1875 Z M 0.65625 -40.1875 L -2.265625 -36.125 L -5.625 -44.890625 L -9.53125 -46.359375 L -4.21875 -48.375 C -3.390625 -48.703125 -2.390625 -48.171875 -2.046875 -47.25 Z M 0.65625 -40.1875 "/><path transform="translate(641.5243 1038.7335)" d="M -0.9375 -50.53125 L -4.890625 -59.3125 L -21.703125 -51.75 L 1.3125 -0.59375 L 18.125 -8.15625 L 13.984375 -17.34375 L 5.296875 -13.4375 L -0.046875 -25.34375 L 3.515625 -26.9375 L 5.171875 -31.953125 L 1.9375 -39.109375 L -4.875 -36.046875 L -8.3125 -43.703125 L -12.4375 -45.359375 Z M -0.9375 -50.53125 "/><path transform="translate(664.6254 1028.2583)" d="M -10.375 -57.90625 L -19.78125 -52.96875 L 0 0 L 7.890625 -4.140625 L 6.140625 -8.5 L 11.53125 -11.328125 L 14.0625 -7.390625 L 21.953125 -11.53125 Z M 3.03125 -16.15625 L -4.65625 -35.0625 L -4.296875 -35.25 L 6.96875 -18.21875 Z M 3.03125 -16.15625 "/><path transform="translate(691.2672 1014.0518)" d="M 1.46875 -41.546875 L -5.953125 -53.5625 C -7.84375 -56.609375 -11.28125 -57.984375 -14.21875 -57.15625 C -14.546875 -57.03125 -14.875 -56.921875 -15.203125 -56.796875 C -15.375 -56.6875 -15.546875 -56.59375 -15.71875 -56.484375 L -22.65625 -52.1875 C -23 -51.984375 -23.40625 -51.71875 -23.703125 -51.375 C -23.8125 -51.3125 -23.9375 -51.234375 -23.9375 -51.140625 C -26.0625 -48.84375 -26.375 -45.15625 -24.484375 -42.109375 L -2.859375 -7.125 C -0.9375 -4 2.75 -2.609375 5.78125 -3.65625 C 5.890625 -3.734375 6.109375 -3.78125 6.234375 -3.859375 C 6.359375 -3.921875 6.46875 -4 6.53125 -4.03125 C 6.703125 -4.140625 6.8125 -4.21875 6.9375 -4.28125 C 7.0625 -4.359375 7.171875 -4.421875 7.34375 -4.546875 L 13.46875 -8.3125 C 13.578125 -8.390625 13.6875 -8.453125 13.875 -8.578125 C 13.984375 -8.640625 14.109375 -8.71875 14.21875 -8.78125 L 14.390625 -8.890625 C 14.390625 -8.890625 14.453125 -8.921875 14.515625 -8.96875 C 17.1875 -11.15625 17.71875 -15.25 15.671875 -18.578125 L 4.078125 -37.328125 L -0.359375 -27.953125 L 5.8125 -17.9375 C 6.34375 -17.109375 6.15625 -16 5.328125 -15.484375 L 4.640625 -15.0625 C 3.875 -14.59375 2.796875 -14.90625 2.265625 -15.734375 L -14.6875 -43.203125 L -17.890625 -43.9375 L -14.5 -46.03125 L -13.8125 -46.453125 C -12.984375 -46.96875 -11.90625 -46.640625 -11.359375 -45.734375 L -5.9375 -36.96875 Z M 1.46875 -41.546875 "/><path transform="translate(716.5502 998.2129)" d="M -21.28125 -53.734375 L -10.1875 -38.3125 L -13.3125 -36.0625 L -24.5 -51.515625 L -31.703125 -46.296875 L 1.171875 -0.84375 L 8.375 -6.0625 L -7.015625 -27.328125 L -3.890625 -29.578125 L 11.5 -8.3125 L 18.71875 -13.53125 L -14.109375 -59.015625 Z M -21.28125 -53.734375 "/><path transform="translate(753.4374 969.9214)" d="M -21.71875 -56.109375 L -37.96875 -41.28125 L -30.984375 -33.625 L -26.125 -38.0625 L 4.703125 -4.296875 L 11.234375 -10.25 L -19.59375 -44.015625 L -14.734375 -48.453125 Z M -21.71875 -56.109375 "/><path transform="translate(773.1221 951.6931)" d="M -19.859375 -46.46875 L -26.828125 -53.125 L -39.5625 -39.796875 L 1 -1.046875 L 13.734375 -14.375 L 6.453125 -21.34375 L -0.140625 -14.453125 L -9.578125 -23.453125 L -6.875 -26.265625 L -7.21875 -31.53125 L -12.90625 -36.96875 L -18.078125 -31.578125 L -24.140625 -37.375 L -28.578125 -37.34375 Z M -19.859375 -46.46875 "/><path transform="translate(791.0582 932.768)" d="M -33.59375 -47.5 L -14.171875 -31.578125 L -36.515625 -43.953125 L -42.46875 -36.6875 L 0.90625 -1.109375 L 6.5625 -8 L -14.140625 -24.984375 L 9.78125 -11.921875 L 15.421875 -18.8125 L -27.953125 -54.390625 Z M -33.59375 -47.5 "/><path transform="translate(811.0822 907.954)" d="M -37.484375 -44.484375 L -16.796875 -30.265625 L -40.078125 -40.703125 L -45.40625 -32.96875 L 0.8125 -1.1875 L 5.859375 -8.515625 L -16.203125 -23.6875 L 8.734375 -12.703125 L 13.78125 -20.046875 L -32.4375 -51.828125 Z M -37.484375 -44.484375 "/><path transform="translate(828.2212 882.3705)" d="M -45.984375 -32.390625 C -45.515625 -31.078125 -44.890625 -29.4375 -44.40625 -28.1875 L 0.703125 -1.171875 L 5.28125 -8.828125 L -42.84375 -37.640625 Z M -45.984375 -32.390625 "/><path transform="translate(836.7406 868.2043)" d="M -24.546875 -37.90625 L -32.65625 -42.15625 C -36.390625 -44.09375 -40.78125 -42.921875 -42.515625 -39.578125 L -46.046875 -32.828125 C -47.78125 -29.5 -46.25 -25.203125 -42.515625 -23.265625 C -42.515625 -23.265625 -35.21875 -19.453125 -35.21875 -19.453125 C -23.46875 -13.09375 -17.296875 -24.09375 -9.578125 -20.0625 L -4.765625 -17.5625 C -3.96875 -17.140625 -3.609375 -16.171875 -3.984375 -15.453125 L -4.234375 -14.96875 C -4.625 -14.234375 -5.59375 -14.03125 -6.390625 -14.453125 L -14.578125 -18.71875 L -17.515625 -13.09375 L -16.203125 -9.53125 L -6.265625 -4.34375 C -2.546875 -2.390625 1.875 -3.59375 3.609375 -6.921875 L 7.140625 -13.671875 C 8.875 -17.015625 7.3125 -21.28125 3.59375 -23.234375 L -7.96875 -29.265625 C -8.234375 -29.40625 -8.515625 -29.546875 -8.875 -29.671875 C -9.015625 -29.75 -9.859375 -30.09375 -11.171875 -30.40625 C -11.234375 -30.421875 -11.296875 -30.46875 -11.390625 -30.4375 C -11.390625 -30.4375 -11.46875 -30.46875 -11.53125 -30.515625 C -11.640625 -30.5 -11.703125 -30.53125 -11.78125 -30.578125 C -11.78125 -30.578125 -11.875 -30.53125 -11.9375 -30.5625 C -11.9375 -30.5625 -12 -30.59375 -12.09375 -30.578125 C -12.09375 -30.578125 -12.171875 -30.625 -12.234375 -30.65625 C -12.40625 -30.671875 -12.5625 -30.671875 -12.734375 -30.6875 C -12.734375 -30.6875 -12.796875 -30.71875 -12.875 -30.75 C -12.90625 -30.6875 -12.96875 -30.71875 -13.046875 -30.765625 C -13.078125 -30.703125 -13.140625 -30.734375 -13.21875 -30.765625 C -13.296875 -30.75 -13.375 -30.796875 -13.4375 -30.828125 C -18.8125 -30.90625 -25.59375 -24.171875 -33.65625 -28.671875 L -36.03125 -29.90625 C -36.84375 -30.34375 -37.234375 -31.25 -36.84375 -31.984375 L -36.59375 -32.46875 C -36.21875 -33.1875 -35.21875 -33.453125 -34.40625 -33.015625 L -28.65625 -30.015625 Z M -24.546875 -37.90625 "/></g></svg></div>
+  </div>
+  <p class="dica" id="dica">Toque na quadra para sacar uma bola</p>
+  <div class="rede" aria-hidden="true"></div>
+</header>
+
+<main>
+  <section class="passos wrap" aria-label="Como funciona">
+    <ol>
+      <li><h3>Saque</h3><p>Escolha um parceiro na lista e abra o cupom.</p></li>
+      <li><h3>Rally</h3><p>Chame no WhatsApp pelo botão. A mensagem já avisa que você é aluno FJ.</p></li>
+      <li><h3>Ponto</h3><p>Combine com o parceiro e use o seu benefício.</p></li>
+    </ol>
+  </section>
+
+  <section class="galeria" aria-labelledby="galeria-titulo">
+    <div class="wrap galeria-head">
+      <h2 class="display" id="galeria-titulo">Areia, raquete <em>e resenha</em></h2>
+      <p>Toque numa foto para ampliar.</p>
+    </div>
+    <div class="trilho" id="trilho"><div class="fita" id="fita"></div></div>
+  </section>
+
+  <section class="parceiros wrap" id="parceiros">
+    <div class="sec-head">
+      <h2 class="display">Parceiros do clube</h2>
+      <div class="busca">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <input id="busca" type="search" placeholder="Buscar empresa ou serviço" aria-label="Buscar empresa ou serviço" autocomplete="off">
+      </div>
+    </div>
+    <div class="filtros" id="filtros" role="group" aria-label="Categorias"></div>
+    <label class="so-desconto"><input type="checkbox" id="so-desconto"> Mostrar só quem já tem desconto definido</label>
+    <p class="contagem" id="contagem" aria-live="polite"></p>
+    <div class="grade" id="grade"></div>
+  </section>
+
+  <section class="faixa" id="faixa" aria-label="Jogo noturno na areia">
+    <img src="assets/img/faixa-noturna.jpg" alt="" id="faixa-img" loading="lazy">
+    <div class="wrap faixa-txt">
+      <p class="display">Treino de noite.<br><em>Vantagem o dia todo.</em></p>
+    </div>
+  </section>
+
+  <section class="carteira">
+    <div class="wrap">
+      <div>
+        <h2 class="display">Sua carteirinha de aluno</h2>
+        <p>Digite seu nome. Ele entra na carteirinha e na mensagem que vai para o parceiro no WhatsApp. Fica salvo só neste aparelho.</p>
+        <div class="campo">
+          <label for="nome-aluno">Seu nome</label>
+          <input id="nome-aluno" type="text" maxlength="40" placeholder="Ex.: Marina Souza" autocomplete="name">
+        </div>
+      </div>
+      <div class="cartao" aria-label="Carteirinha do aluno">
+        <p class="eyebrow">Clube de Vantagens</p>
+        <svg class="logo" viewBox="256 4 620 1076" overflow="visible" aria-hidden="true"><g fill="currentColor"><path d="M 286.375 566.625 C 286.378906 507.421875 286.675781 448.214844 286.195312 389.015625 C 286.054688 371.328125 291.828125 359.109375 307.09375 348.703125 C 456.382812 246.890625 605.214844 144.402344 754.160156 42.078125 C 762.246094 36.523438 770.207031 30.34375 780.636719 36.269531 C 790.667969 41.96875 790.839844 51.808594 790.816406 61.714844 C 790.738281 94.007812 790.074219 126.320312 791.015625 158.582031 C 791.492188 174.894531 785.871094 185.867188 772.472656 195.015625 C 681.421875 257.183594 590.675781 319.792969 499.839844 382.277344 C 477.6875 397.515625 455.496094 412.699219 433.476562 428.128906 C 422.769531 435.632812 417.292969 463.375 424.960938 473.429688 C 432.207031 482.925781 440.796875 479.792969 449.058594 474.007812 C 476.367188 454.878906 503.644531 435.703125 531.089844 416.773438 C 545.699219 406.695312 560.441406 396.78125 575.472656 387.355469 C 594.832031 375.21875 609.996094 382.988281 610.265625 405.492188 C 610.707031 442.082031 610.101562 478.6875 610.453125 515.28125 C 610.570312 527.636719 604.453125 535.023438 594.875 541.472656 C 551.148438 570.914062 507.957031 601.140625 466.25 633.40625 C 424.957031 665.347656 409.148438 717.988281 426.445312 764.652344 C 445.285156 815.484375 492.410156 846.902344 545.355469 843.9375 C 604.839844 840.601562 653.550781 790.660156 654.492188 730.921875 C 655.246094 683.03125 655.230469 635.117188 654.714844 587.222656 C 654.523438 569.726562 660.835938 558.125 676.097656 549.109375 C 703.398438 532.980469 729.511719 514.863281 756.519531 498.21875 C 776.542969 485.878906 790.550781 493.402344 790.640625 516.6875 C 790.925781 589.882812 792.460938 663.136719 790.207031 736.265625 C 786.402344 859.625 680.722656 969.234375 560.160156 977.796875 C 425.332031 987.375 313.507812 902.050781 289.273438 771.46875 C 284.796875 747.367188 286.679688 723.179688 286.480469 699.027344 C 286.113281 654.894531 286.375 610.757812 286.375 566.625 "/><path d="M 753.574219 373.351562 C 745.199219 359.5625 743.535156 344.625 746.792969 329.125 C 750.816406 310.015625 750.605469 309.488281 730.898438 307.726562 C 728.113281 307.476562 725.285156 307.691406 722.476562 307.691406 C 712.347656 307.269531 702.691406 309.566406 693.117188 312.667969 C 686.613281 314.78125 686 317.277344 690.925781 322.183594 C 703.828125 335.035156 710.183594 350.480469 707.4375 368.863281 C 705.957031 378.789062 702.144531 388.101562 698.417969 397.359375 C 693.859375 408.679688 689.671875 420.0625 687.9375 432.226562 C 685.351562 450.410156 694.886719 469.417969 710.457031 474.257812 C 726.339844 479.195312 742.253906 477.6875 756.253906 468.234375 C 778.097656 453.480469 783.5 423.390625 769.253906 398.871094 C 764.238281 390.242188 758.757812 381.886719 753.574219 373.351562 "/><path d="M 639.144531 402.710938 C 642.613281 432.183594 658.1875 453.816406 685.785156 467.28125 C 671.621094 439.296875 682.402344 414.132812 692.660156 388.863281 C 694.640625 383.984375 696.105469 378.867188 697.480469 373.769531 C 702.300781 355.855469 697.304688 340.832031 684.308594 327.84375 C 678.652344 322.191406 674.300781 322.5 668.476562 327.6875 C 645.890625 347.800781 635.621094 372.816406 639.144531 402.710938 "/><path d="M 780.960938 330.929688 C 775.339844 325.5 769.035156 316.027344 761.417969 319.5 C 753.898438 322.933594 755.058594 334.0625 754.640625 342.398438 C 753.894531 357.242188 760.523438 369.449219 768.765625 381 C 783.304688 401.378906 789.523438 423.1875 780.785156 447.753906 C 780.210938 449.367188 779.050781 451.207031 780.910156 453.582031 C 785.203125 451.625 787.855469 447.859375 790.539062 444.226562 C 817.164062 408.207031 813.371094 362.246094 780.960938 330.929688 "/><path transform="translate(613.3738 1049.6868)" d="M 10.0625 -15.515625 C 10.4375 -14.53125 10.015625 -13.546875 9.1875 -13.21875 L 6.8125 -12.3125 L -0.046875 -30.28125 L 0.015625 -30.3125 C 0.875 -29.8125 4.09375 -28.109375 5.546875 -27.359375 Z M 8.8125 -45.1875 C 8.78125 -45.234375 8.75 -45.3125 8.734375 -45.390625 L 5.6875 -53.375 C 4.671875 -56.015625 2.625 -57.921875 0.25 -58.578125 C -1.171875 -59.015625 -2.71875 -59 -4.125 -58.453125 L -18.65625 -52.921875 L 1.34375 -0.515625 L 15.875 -6.046875 C 16.578125 -6.328125 17.203125 -6.65625 17.8125 -7.140625 C 18.34375 -7.640625 18.8125 -8.15625 19.234375 -8.8125 C 20.5625 -10.875 20.828125 -13.671875 19.828125 -16.3125 L 14.40625 -30.5 C 14.21875 -31 14.03125 -31.484375 13.796875 -31.875 C 13.203125 -32.890625 12.46875 -33.65625 11.625 -34.34375 C 10.84375 -35.015625 9.9375 -35.484375 8.953125 -35.765625 C 8.359375 -35.921875 7.75 -36.03125 7.078125 -36.03125 C 7.59375 -36.453125 7.984375 -36.9375 8.296875 -37.46875 C 9.640625 -39.53125 9.890625 -42.328125 8.890625 -44.96875 C 8.859375 -45.03125 8.828125 -45.109375 8.8125 -45.1875 Z M 0.65625 -40.1875 L -2.265625 -36.125 L -5.625 -44.890625 L -9.53125 -46.359375 L -4.21875 -48.375 C -3.390625 -48.703125 -2.390625 -48.171875 -2.046875 -47.25 Z M 0.65625 -40.1875 "/><path transform="translate(641.5243 1038.7335)" d="M -0.9375 -50.53125 L -4.890625 -59.3125 L -21.703125 -51.75 L 1.3125 -0.59375 L 18.125 -8.15625 L 13.984375 -17.34375 L 5.296875 -13.4375 L -0.046875 -25.34375 L 3.515625 -26.9375 L 5.171875 -31.953125 L 1.9375 -39.109375 L -4.875 -36.046875 L -8.3125 -43.703125 L -12.4375 -45.359375 Z M -0.9375 -50.53125 "/><path transform="translate(664.6254 1028.2583)" d="M -10.375 -57.90625 L -19.78125 -52.96875 L 0 0 L 7.890625 -4.140625 L 6.140625 -8.5 L 11.53125 -11.328125 L 14.0625 -7.390625 L 21.953125 -11.53125 Z M 3.03125 -16.15625 L -4.65625 -35.0625 L -4.296875 -35.25 L 6.96875 -18.21875 Z M 3.03125 -16.15625 "/><path transform="translate(691.2672 1014.0518)" d="M 1.46875 -41.546875 L -5.953125 -53.5625 C -7.84375 -56.609375 -11.28125 -57.984375 -14.21875 -57.15625 C -14.546875 -57.03125 -14.875 -56.921875 -15.203125 -56.796875 C -15.375 -56.6875 -15.546875 -56.59375 -15.71875 -56.484375 L -22.65625 -52.1875 C -23 -51.984375 -23.40625 -51.71875 -23.703125 -51.375 C -23.8125 -51.3125 -23.9375 -51.234375 -23.9375 -51.140625 C -26.0625 -48.84375 -26.375 -45.15625 -24.484375 -42.109375 L -2.859375 -7.125 C -0.9375 -4 2.75 -2.609375 5.78125 -3.65625 C 5.890625 -3.734375 6.109375 -3.78125 6.234375 -3.859375 C 6.359375 -3.921875 6.46875 -4 6.53125 -4.03125 C 6.703125 -4.140625 6.8125 -4.21875 6.9375 -4.28125 C 7.0625 -4.359375 7.171875 -4.421875 7.34375 -4.546875 L 13.46875 -8.3125 C 13.578125 -8.390625 13.6875 -8.453125 13.875 -8.578125 C 13.984375 -8.640625 14.109375 -8.71875 14.21875 -8.78125 L 14.390625 -8.890625 C 14.390625 -8.890625 14.453125 -8.921875 14.515625 -8.96875 C 17.1875 -11.15625 17.71875 -15.25 15.671875 -18.578125 L 4.078125 -37.328125 L -0.359375 -27.953125 L 5.8125 -17.9375 C 6.34375 -17.109375 6.15625 -16 5.328125 -15.484375 L 4.640625 -15.0625 C 3.875 -14.59375 2.796875 -14.90625 2.265625 -15.734375 L -14.6875 -43.203125 L -17.890625 -43.9375 L -14.5 -46.03125 L -13.8125 -46.453125 C -12.984375 -46.96875 -11.90625 -46.640625 -11.359375 -45.734375 L -5.9375 -36.96875 Z M 1.46875 -41.546875 "/><path transform="translate(716.5502 998.2129)" d="M -21.28125 -53.734375 L -10.1875 -38.3125 L -13.3125 -36.0625 L -24.5 -51.515625 L -31.703125 -46.296875 L 1.171875 -0.84375 L 8.375 -6.0625 L -7.015625 -27.328125 L -3.890625 -29.578125 L 11.5 -8.3125 L 18.71875 -13.53125 L -14.109375 -59.015625 Z M -21.28125 -53.734375 "/><path transform="translate(753.4374 969.9214)" d="M -21.71875 -56.109375 L -37.96875 -41.28125 L -30.984375 -33.625 L -26.125 -38.0625 L 4.703125 -4.296875 L 11.234375 -10.25 L -19.59375 -44.015625 L -14.734375 -48.453125 Z M -21.71875 -56.109375 "/><path transform="translate(773.1221 951.6931)" d="M -19.859375 -46.46875 L -26.828125 -53.125 L -39.5625 -39.796875 L 1 -1.046875 L 13.734375 -14.375 L 6.453125 -21.34375 L -0.140625 -14.453125 L -9.578125 -23.453125 L -6.875 -26.265625 L -7.21875 -31.53125 L -12.90625 -36.96875 L -18.078125 -31.578125 L -24.140625 -37.375 L -28.578125 -37.34375 Z M -19.859375 -46.46875 "/><path transform="translate(791.0582 932.768)" d="M -33.59375 -47.5 L -14.171875 -31.578125 L -36.515625 -43.953125 L -42.46875 -36.6875 L 0.90625 -1.109375 L 6.5625 -8 L -14.140625 -24.984375 L 9.78125 -11.921875 L 15.421875 -18.8125 L -27.953125 -54.390625 Z M -33.59375 -47.5 "/><path transform="translate(811.0822 907.954)" d="M -37.484375 -44.484375 L -16.796875 -30.265625 L -40.078125 -40.703125 L -45.40625 -32.96875 L 0.8125 -1.1875 L 5.859375 -8.515625 L -16.203125 -23.6875 L 8.734375 -12.703125 L 13.78125 -20.046875 L -32.4375 -51.828125 Z M -37.484375 -44.484375 "/><path transform="translate(828.2212 882.3705)" d="M -45.984375 -32.390625 C -45.515625 -31.078125 -44.890625 -29.4375 -44.40625 -28.1875 L 0.703125 -1.171875 L 5.28125 -8.828125 L -42.84375 -37.640625 Z M -45.984375 -32.390625 "/><path transform="translate(836.7406 868.2043)" d="M -24.546875 -37.90625 L -32.65625 -42.15625 C -36.390625 -44.09375 -40.78125 -42.921875 -42.515625 -39.578125 L -46.046875 -32.828125 C -47.78125 -29.5 -46.25 -25.203125 -42.515625 -23.265625 C -42.515625 -23.265625 -35.21875 -19.453125 -35.21875 -19.453125 C -23.46875 -13.09375 -17.296875 -24.09375 -9.578125 -20.0625 L -4.765625 -17.5625 C -3.96875 -17.140625 -3.609375 -16.171875 -3.984375 -15.453125 L -4.234375 -14.96875 C -4.625 -14.234375 -5.59375 -14.03125 -6.390625 -14.453125 L -14.578125 -18.71875 L -17.515625 -13.09375 L -16.203125 -9.53125 L -6.265625 -4.34375 C -2.546875 -2.390625 1.875 -3.59375 3.609375 -6.921875 L 7.140625 -13.671875 C 8.875 -17.015625 7.3125 -21.28125 3.59375 -23.234375 L -7.96875 -29.265625 C -8.234375 -29.40625 -8.515625 -29.546875 -8.875 -29.671875 C -9.015625 -29.75 -9.859375 -30.09375 -11.171875 -30.40625 C -11.234375 -30.421875 -11.296875 -30.46875 -11.390625 -30.4375 C -11.390625 -30.4375 -11.46875 -30.46875 -11.53125 -30.515625 C -11.640625 -30.5 -11.703125 -30.53125 -11.78125 -30.578125 C -11.78125 -30.578125 -11.875 -30.53125 -11.9375 -30.5625 C -11.9375 -30.5625 -12 -30.59375 -12.09375 -30.578125 C -12.09375 -30.578125 -12.171875 -30.625 -12.234375 -30.65625 C -12.40625 -30.671875 -12.5625 -30.671875 -12.734375 -30.6875 C -12.734375 -30.6875 -12.796875 -30.71875 -12.875 -30.75 C -12.90625 -30.6875 -12.96875 -30.71875 -13.046875 -30.765625 C -13.078125 -30.703125 -13.140625 -30.734375 -13.21875 -30.765625 C -13.296875 -30.75 -13.375 -30.796875 -13.4375 -30.828125 C -18.8125 -30.90625 -25.59375 -24.171875 -33.65625 -28.671875 L -36.03125 -29.90625 C -36.84375 -30.34375 -37.234375 -31.25 -36.84375 -31.984375 L -36.59375 -32.46875 C -36.21875 -33.1875 -35.21875 -33.453125 -34.40625 -33.015625 L -28.65625 -30.015625 Z M -24.546875 -37.90625 "/></g></svg>
+        <div class="nome" id="cartao-nome">Aluno(a) FJ</div>
+        <div class="rodape">Filipe Jr Beach Tennis</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="convite" id="convite">
+    <div class="bola-x" aria-hidden="true"><span class="bola"></span></div>
+    <div class="wrap">
+      <h2 class="display">Sua empresa também joga?</h2>
+      <p>Alunos podem incluir a própria empresa no clube. Fale com o professor Filipe na quadra e combine o benefício que você quer oferecer.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Filipe Jr Beach Tennis · Clube de Vantagens para alunos</span>
+    <span>Benefícios válidos conforme combinado com cada parceiro.</span>
+    <span>Fotos e vídeo ilustrativos: Pexels. · <a href="admin/" style="color:inherit;opacity:.6">Área do clube</a></span>
+  </div>
+</footer>
+
+<dialog id="foto-dlg" class="foto-dlg" aria-label="Foto ampliada">
+  <img id="foto-grande" alt="">
+  <p id="foto-legenda"></p>
+  <button class="fechar" id="foto-fechar" type="button" aria-label="Fechar">✕</button>
+</dialog>
+
+<dialog id="dlg" aria-labelledby="dlg-nome">
+  <div class="dlg-topo">
+    <span class="cat" id="dlg-cat"></span>
+    <h3 id="dlg-nome"></h3>
+    <button class="fechar" id="dlg-fechar" type="button" aria-label="Fechar">✕</button>
+  </div>
+  <div class="dlg-corpo">
+    <p id="dlg-desc"></p>
+    <div class="selo" id="dlg-selo"></div>
+    <div class="contatos" id="dlg-contatos"></div>
+    <div class="msg"><small>Mensagem que será enviada</small><span id="dlg-msg"></span></div>
+    <div class="dlg-rodape">
+      <button class="btn" id="dlg-copiar" type="button">Copiar mensagem</button>
+      <span class="aviso" id="dlg-aviso" aria-live="polite"></span>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* =====================================================================
+   DADOS DO CLUBE — vêm dos arquivos da pasta /dados, editados pelo painel /admin.
+   ===================================================================== */
+(async function () {
+const ler = (arq) => fetch(arq, { cache: "no-cache" }).then((r) => r.ok ? r.json() : {}).catch(() => ({}));
+const [dCat, dPar, dGal] = await Promise.all([ler("dados/categorias.json"), ler("dados/parceiros.json"), ler("dados/galeria.json")]);
+const ICO_PADRAO = "M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6L3.4 9.3l6-.7z";
+const CATEGORIAS = (dCat.categorias || []).filter((c) => c && c.id && c.nome)
+  .map((c) => ({ id: String(c.id), nome: c.nome, icone: c.icone || ICO_PADRAO }));
+const soNum = (s) => String(s || "").replace(/\D/g, "");
+const PARCEIROS = (dPar.parceiros || []).filter((p) => p && p.nome && p.ativo !== false).map((p) => ({
+  nome: p.nome,
+  cat: p.categoria,
+  desc: p.descricao || "",
+  beneficio: (p.beneficio || "").trim() || null,
+  pessoa: p.responsavel || "",
+  link: (p.link || "").trim(),
+  contatos: (p.whatsapp || []).map((w) => (typeof w === "object" && w ? w.numero : w))
+    .filter((w) => soNum(w).length >= 10)
+    .map((w) => { const n = soNum(w); return { fone: n.startsWith("55") && n.length > 11 ? n : "55" + n, exibe: String(w).trim() }; })
+}));
+const FOTOS = (dGal.fotos || []).filter((f) => f && f.src).map((f) => ({ src: f.src, legenda: f.legenda || "" }));
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const semAcento = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const catDe = (id) => CATEGORIAS.find((c) => c.id === id);
+const catOu = (id) => catDe(id) || { id: "outros", nome: "Outros", icone: ICO_PADRAO };
+const ICO_LINK = "M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1";
+const hrefSeguro = (u) => { const t = /^https?:\/\//i.test(u) ? u : "https://" + u; try { return new URL(t).href; } catch (e) { return ""; } };
+const icone = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+const ICO_CHAT = "M4 5h16v11H9l-5 4z";
+
+const estado = { cat: "todos", busca: "", soDesconto: false, nome: "" };
+try { estado.nome = localStorage.getItem("fj-nome-aluno") || ""; } catch (e) {}
+
+function mensagem(p) {
+  const quem = estado.nome.trim() ? `Sou ${estado.nome.trim()}, aluno(a)` : "Sou aluno(a)";
+  return `Olá! ${quem} da FJ Beach Tennis e vi a ${p.nome} no Clube de Vantagens. Quero saber como usar meu benefício.`;
+}
+const linkZap = (p, c) => `https://wa.me/${c.fone}?text=${encodeURIComponent(mensagem(p))}`;
+
+function filtrados() {
+  const q = semAcento(estado.busca.trim());
+  return PARCEIROS.filter((p) => {
+    if (estado.cat !== "todos" && p.cat !== estado.cat) return false;
+    if (estado.soDesconto && !p.beneficio) return false;
+    if (q && !semAcento(`${p.nome} ${p.desc} ${catOu(p.cat).nome}`).includes(q)) return false;
+    return true;
+  });
+}
+
+function desenhaFiltros() {
+  const chips = [{ id: "todos", nome: "Todos", n: PARCEIROS.length }]
+    .concat(CATEGORIAS.map((c) => ({ ...c, n: PARCEIROS.filter((p) => p.cat === c.id).length })));
+  $("filtros").innerHTML = chips.map((c) =>
+    `<button class="chip" type="button" data-cat="${c.id}" aria-pressed="${estado.cat === c.id}">${c.icone ? icone(c.icone) : ""}${esc(c.nome)} <small>${c.n}</small></button>`
+  ).join("");
+}
+
+function desenhaGrade() {
+  const lista = filtrados();
+  $("contagem").textContent = lista.length === PARCEIROS.length
+    ? `${lista.length} parceiros`
+    : `${lista.length} de ${PARCEIROS.length} parceiros`;
+  if (!lista.length) {
+    $("grade").innerHTML = `<div class="vazio">Nenhum parceiro encontrado. Tente outra busca ou escolha "Todos".</div>`;
+    return;
+  }
+  $("grade").innerHTML = lista.map((p, n) => {
+    const i = PARCEIROS.indexOf(p), c = catOu(p.cat);
+    const zap = p.contatos[0]
+      ? `<a class="btn" href="${linkZap(p, p.contatos[0])}" target="_blank" rel="noopener">${icone(ICO_CHAT)}WhatsApp</a>`
+      : (p.link && hrefSeguro(p.link) ? `<a class="btn" href="${esc(hrefSeguro(p.link))}" target="_blank" rel="noopener">${icone(ICO_LINK)}Site</a>` : "");
+    const canhoto = p.beneficio
+      ? `<i></i><b>${esc(p.beneficio)}</b><span>de desconto</span>`
+      : `<b>FJ</b><span>condição a combinar</span>`;
+    return `<article class="cupom${p.beneficio ? " tem-desconto" : ""}" style="--i:${Math.min(n, 14)}">
+      <div class="cupom-corpo">
+        <span class="cat">${icone(c.icone)}${esc(c.nome)}</span>
+        <h3>${esc(p.nome)}</h3>
+        <p>${esc(p.desc)}</p>
+        <div class="cupom-acoes">
+          <button class="btn cheio" type="button" data-abrir="${i}">Abrir cupom</button>${zap}
+        </div>
+      </div>
+      <div class="canhoto">${canhoto}</div>
+    </article>`;
+  }).join("");
+}
+
+let aberto = null;
+function abrir(i) {
+  const p = PARCEIROS[i]; aberto = p;
+  $("dlg-cat").textContent = catOu(p.cat).nome;
+  $("dlg-nome").textContent = p.nome;
+  $("dlg-desc").textContent = p.desc;
+  const selo = $("dlg-selo");
+  selo.className = "selo" + (p.beneficio ? " on" : "");
+  selo.innerHTML = p.beneficio
+    ? `<b>${esc(p.beneficio)}</b><span>de desconto para alunos FJ. Avise que você faz parte do clube antes de fechar.</span>`
+    : `<span>Benefício para alunos FJ ainda sendo combinado. Chame o parceiro e pergunte pela condição do clube.</span>`;
+  $("dlg-contatos").innerHTML = p.contatos.length
+    ? p.contatos.map((c) => `<div class="contato"><span class="num">${esc(c.exibe)}</span><a class="btn cheio grande" href="${linkZap(p, c)}" target="_blank" rel="noopener">${icone(ICO_CHAT)}Chamar no WhatsApp</a></div>`).join("")
+    : `<p class="aviso">Contato${p.pessoa ? ` com ${esc(p.pessoa)}` : ""}: WhatsApp em breve nesta página. Por enquanto, peça o contato na quadra.</p>`;
+  if (p.link && hrefSeguro(p.link)) $("dlg-contatos").insertAdjacentHTML("beforeend",
+    `<div class="contato"><span class="num">Site / Instagram</span><a class="btn grande" href="${esc(hrefSeguro(p.link))}" target="_blank" rel="noopener">${icone(ICO_LINK)}Abrir link</a></div>`);
+  $("dlg-msg").textContent = mensagem(p);
+  $("dlg-aviso").textContent = "";
+  $("dlg").showModal();
+}
+
+/* eventos */
+$("filtros").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-cat]"); if (!b) return;
+  estado.cat = b.dataset.cat;
+  try { history.replaceState(null, "", estado.cat === "todos" ? "#parceiros" : "#" + estado.cat); } catch (err) {}
+  desenhaFiltros(); desenhaGrade();
+});
+$("busca").addEventListener("input", (e) => { estado.busca = e.target.value; desenhaGrade(); });
+$("so-desconto").addEventListener("change", (e) => { estado.soDesconto = e.target.checked; desenhaGrade(); });
+$("grade").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-abrir]"); if (b) abrir(+b.dataset.abrir);
+});
+$("dlg-fechar").addEventListener("click", () => $("dlg").close());
+$("dlg").addEventListener("click", (e) => { if (e.target === $("dlg")) $("dlg").close(); });
+$("dlg-copiar").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(mensagem(aberto)); $("dlg-aviso").textContent = "Mensagem copiada."; }
+  catch (err) { $("dlg-aviso").textContent = "Não deu para copiar aqui. Selecione o texto acima e copie."; }
+});
+$("nome-aluno").addEventListener("input", (e) => {
+  estado.nome = e.target.value;
+  $("cartao-nome").textContent = estado.nome.trim() || "Aluno(a) FJ";
+  try { localStorage.setItem("fj-nome-aluno", estado.nome); } catch (err) {}
+  const nm = $("cartao-nome"); nm.classList.remove("pulo"); void nm.offsetWidth; nm.classList.add("pulo");
+});
+
+function lerHash() {
+  const h = location.hash.replace("#", "");
+  if (catDe(h)) { estado.cat = h; desenhaFiltros(); desenhaGrade(); }
+}
+window.addEventListener("hashchange", lerHash);
+
+/* início */
+const PLACAR = [["n-parceiros", PARCEIROS.length], ["n-categorias", CATEGORIAS.length], ["n-descontos", PARCEIROS.filter((p) => p.beneficio).length]];
+PLACAR.forEach(([id, n]) => { $(id).textContent = n; });
+$("nome-aluno").value = estado.nome;
+$("cartao-nome").textContent = estado.nome.trim() || "Aluno(a) FJ";
+const h0 = location.hash.replace("#", ""); if (catDe(h0)) estado.cat = h0;
+desenhaFiltros(); desenhaGrade();
+
+/* =====================================================================
+   MOVIMENTO — cena animada do topo, areia ao rolar, e microinterações.
+   ===================================================================== */
+$("nome-aluno").addEventListener("change", desenhaGrade); // atualiza os links com o nome
+
+(function () {
+  const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const raiz = document.documentElement;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  /* --- barra de progresso com a bola rolando --- */
+  function progresso() {
+    const max = raiz.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    $("prog-barra").style.transform = `scaleX(${p})`;
+    $("prog-bola").style.transform = `translateX(${p * (innerWidth - 18)}px) rotate(${p * 1440}deg)`;
+  }
+  addEventListener("scroll", progresso, { passive: true });
+  addEventListener("resize", progresso);
+  progresso();
+
+  if (calmo) { desenhaParado(); return; }
+
+  /* --- placar contando --- */
+  const t0 = performance.now();
+  (function conta(t) {
+    const k = Math.min(1, (t - t0 - 500) / 1100), e = k <= 0 ? 0 : 1 - Math.pow(1 - k, 3);
+    PLACAR.forEach(([id, n]) => { $(id).textContent = Math.round(n * e); });
+    if (k < 1) requestAnimationFrame(conta);
+  })(t0);
+
+  /* --- seções surgem ao rolar (só as que começam fora da tela) --- */
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("in", "viu"); io.unobserve(e.target); }
+    }), { threshold: 0.18 });
+    document.querySelectorAll(".passos li, .sec-head, .carteira .wrap > *, .convite .wrap > *").forEach((el, i) => {
+      if (el.getBoundingClientRect().top > innerHeight * 0.92) {
+        el.classList.add("rev"); el.style.setProperty("--d", i % 3); io.observe(el);
+      }
+    });
+    io.observe($("convite"));
+    setTimeout(() => document.querySelectorAll(".rev").forEach((el) => {
+      if (el.getBoundingClientRect().top < innerHeight) el.classList.add("in");
+    }), 1500);
+  } else { $("convite").classList.add("viu"); }
+
+  /* --- cupons e carteirinha inclinam com o ponteiro --- */
+  if (matchMedia("(hover:hover)").matches) {
+    const inclina = (el, e, f) => {
+      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      el.style.setProperty("--ry", ((x - 0.5) * f).toFixed(2) + "deg");
+      el.style.setProperty("--rx", ((0.5 - y) * f).toFixed(2) + "deg");
+      el.style.setProperty("--gx", (x * 100).toFixed(0) + "%");
+      el.style.setProperty("--gy", (y * 100).toFixed(0) + "%");
+    };
+    const solta = (el) => { el.style.setProperty("--rx", "0deg"); el.style.setProperty("--ry", "0deg"); };
+    let atual = null;
+    $("grade").addEventListener("pointermove", (e) => {
+      const c = e.target.closest(".cupom");
+      if (atual && atual !== c) solta(atual);
+      atual = c; if (c) inclina(c, e, 9);
+    });
+    $("grade").addEventListener("pointerleave", () => { if (atual) solta(atual); atual = null; });
+    const cartao = document.querySelector(".cartao");
+    cartao.addEventListener("pointermove", (e) => inclina(cartao, e, 16));
+    cartao.addEventListener("pointerleave", () => solta(cartao));
+  }
+
+  /* --- cena do topo: bolas em jogo, areia levantando, refletor --- */
+  const hero = $("hero"), cena = $("cena"), cx = cena.getContext("2d");
+  const areia = $("areia"), ax = areia.getContext("2d");
+  let W = 0, H = 0, AW = 0, AH = 0, dpr = 1;
+  const bolas = [], graos = [], poeira = [], chaoAreia = [];
+  function mede() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cena.width = W * dpr; cena.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    AW = innerWidth; AH = innerHeight;
+    areia.width = AW * dpr; areia.height = AH * dpr; ax.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  mede(); addEventListener("resize", mede);
+  for (let i = 0; i < 70; i++) poeira.push({ x: Math.random(), y: Math.random(), r: rnd(0.6, 2.2), v: rnd(6, 26), f: rnd(0, 6.28) });
+  for (let i = 0; i < 80; i++) chaoAreia.push({ x: Math.random(), y: Math.random(), z: rnd(0.3, 1), r: rnd(0.8, 2.6) });
+
+  const chao = () => H - 44;
+  function saque(x, y, dir, forca) {
+    if (bolas.length > 7) bolas.shift();
+    bolas.push({ x, y, vx: dir * rnd(170, 380) * (forca || 1), vy: -rnd(240, 520), r: rnd(7, 15), rastro: [], q: 0, rot: 0 });
+  }
+  function levanta(x, y, n, cor) {
+    for (let i = 0; i < n; i++) graos.push({ x, y, vx: rnd(-150, 150), vy: -rnd(60, 300), vida: 1, r: rnd(1, 3), cor });
+  }
+  hero.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("a")) return;
+    const r = hero.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    saque(x, y, x < W / 2 ? 1 : -1, 1.1);
+    levanta(x, y, 8, "255,255,255");
+    $("dica").style.opacity = 0;
+  });
+
+  let vento = 0, ultimoY = scrollY, proximo = 0.4, ant = performance.now(), heroVisivel = true;
+  if ("IntersectionObserver" in window) new IntersectionObserver((es) => { heroVisivel = es[0].isIntersecting; }).observe(hero);
+
+  function quadro(agora) {
+    requestAnimationFrame(quadro);
+    if (document.hidden) { ant = agora; return; }
+    const dt = Math.min(0.04, (agora - ant) / 1000); ant = agora;
+    const sy = scrollY, dy = sy - ultimoY; ultimoY = sy;
+    vento += (dy * 6 - vento) * 0.12;
+    raiz.style.setProperty("--sy", Math.min(sy, 900).toFixed(0));
+
+    /* areia do fundo: grãos e ondas que andam com a rolagem */
+    ax.clearRect(0, 0, AW, AH);
+    const t = agora / 1000;
+    ax.lineWidth = 1.5;
+    for (let i = 0; i < 6; i++) {
+      const base = ((i / 6) * AH * 1.2 - sy * (0.18 + i * 0.03)) % (AH * 1.2);
+      const y0 = (base < 0 ? base + AH * 1.2 : base) - AH * 0.1;
+      ax.strokeStyle = `rgba(150,118,70,${0.1 + (i % 3) * 0.035})`;
+      ax.beginPath();
+      for (let x = -20; x <= AW + 20; x += 24) {
+        const y = y0 + Math.sin(x * 0.008 + t * 0.5 + i * 1.7) * 14 + Math.sin(x * 0.021 - t * 0.3 + i) * 5;
+        x === -20 ? ax.moveTo(x, y) : ax.lineTo(x, y);
+      }
+      ax.stroke();
+    }
+    for (const g of chaoAreia) {
+      g.x += ((10 + Math.abs(vento) * 0.5) * g.z * dt) / AW; if (g.x > 1.02) g.x = -0.02;
+      let y = (g.y * AH - sy * g.z * 0.35) % AH; if (y < 0) y += AH;
+      ax.fillStyle = `rgba(140,108,62,${0.18 + g.z * 0.3})`;
+      ax.beginPath(); ax.arc(g.x * AW, y, g.r * g.z, 0, 6.283); ax.fill();
+    }
+
+    if (!heroVisivel) return;
+    /* cena do topo */
+    cx.clearRect(0, 0, W, H);
+    const gx = W * (0.78 + Math.sin(t * 0.35) * 0.05), gy = H * (0.4 + Math.cos(t * 0.28) * 0.06), gr = Math.max(W, H) * 0.55;
+    const luz = cx.createRadialGradient(gx, gy, 0, gx, gy, gr);
+    luz.addColorStop(0, "rgba(242,106,27,.30)"); luz.addColorStop(0.45, "rgba(14,94,111,.16)"); luz.addColorStop(1, "rgba(20,18,19,0)");
+    cx.fillStyle = luz; cx.fillRect(0, 0, W, H);
+
+    for (const p of poeira) {
+      p.x += ((p.v + Math.abs(vento) * 0.4) * dt) / W; if (p.x > 1.02) p.x = -0.02;
+      const y = (p.y + Math.sin(t * 0.6 + p.f) * 0.02) * H - Math.min(sy, 600) * 0.12 * p.r;
+      cx.fillStyle = `rgba(239,227,204,${0.12 + p.r * 0.13})`;
+      cx.beginPath(); cx.arc(p.x * W, ((y % H) + H) % H, p.r, 0, 6.283); cx.fill();
+    }
+
+    proximo -= dt;
+    if (proximo <= 0 && bolas.length < 4) {
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      saque(dir > 0 ? -20 : W + 20, H * rnd(0.3, 0.75), dir);
+      proximo = rnd(0.9, 2.2);
+    }
+    for (let i = bolas.length - 1; i >= 0; i--) {
+      const b = bolas[i];
+      b.vy += 640 * dt; b.x += b.vx * dt; b.y += b.vy * dt; b.rot += b.vx * dt * 0.03;
+      if (b.y + b.r > chao() && b.vy > 0) {
+        b.y = chao() - b.r; b.vy *= -0.66; b.vx *= 0.9; b.q++;
+        levanta(b.x, chao(), 9, "239,227,204");
+      }
+      b.rastro.push(b.x, b.y); if (b.rastro.length > 28) b.rastro.splice(0, 2);
+      if (b.q > 3 || b.x < -80 || b.x > W + 80) { bolas.splice(i, 1); continue; }
+      for (let k = 0; k < b.rastro.length; k += 2) {
+        const a = k / b.rastro.length;
+        cx.fillStyle = `rgba(242,106,27,${a * 0.28})`;
+        cx.beginPath(); cx.arc(b.rastro[k], b.rastro[k + 1], b.r * (0.35 + a * 0.6), 0, 6.283); cx.fill();
+      }
+      desenhaBola(cx, b.x, b.y, b.r, b.rot);
+    }
+    for (let i = graos.length - 1; i >= 0; i--) {
+      const g = graos[i];
+      g.vy += 700 * dt; g.x += g.vx * dt; g.y += g.vy * dt; g.vida -= dt * 1.6;
+      if (g.vida <= 0) { graos.splice(i, 1); continue; }
+      cx.fillStyle = `rgba(${g.cor},${g.vida * 0.8})`;
+      cx.beginPath(); cx.arc(g.x, g.y, g.r, 0, 6.283); cx.fill();
+    }
+  }
+  requestAnimationFrame(quadro);
+
+  function desenhaBola(c, x, y, r, rot) {
+    const g = c.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.1, x, y, r);
+    g.addColorStop(0, "#ffa35e"); g.addColorStop(0.6, "#f26a1b"); g.addColorStop(1, "#c9500c");
+    c.fillStyle = g; c.beginPath(); c.arc(x, y, r, 0, 6.283); c.fill();
+    c.save(); c.translate(x, y); c.rotate(rot); c.beginPath(); c.arc(0, 0, r, 0, 6.283); c.clip();
+    c.strokeStyle = "rgba(255,255,255,.8)"; c.lineWidth = Math.max(1, r * 0.14);
+    c.beginPath(); c.arc(-r * 1.1, 0, r * 0.95, -1, 1); c.stroke();
+    c.beginPath(); c.arc(r * 1.1, 0, r * 0.95, 2.14, 4.14); c.stroke();
+    c.restore();
+  }
+
+  /* sem movimento: um quadro parado, para o topo não ficar vazio */
+  function desenhaParado() {
+    const hero = $("hero"), cena = $("cena"), c = cena.getContext("2d");
+    const w = hero.clientWidth, h = hero.clientHeight;
+    cena.width = w; cena.height = h;
+    const luz = c.createRadialGradient(w * 0.78, h * 0.4, 0, w * 0.78, h * 0.4, Math.max(w, h) * 0.55);
+    luz.addColorStop(0, "rgba(242,106,27,.28)"); luz.addColorStop(0.45, "rgba(14,94,111,.15)"); luz.addColorStop(1, "rgba(20,18,19,0)");
+    c.fillStyle = luz; c.fillRect(0, 0, w, h);
+  }
+})();
+
+
+
+(function () {
+  const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fita = $("fita"), trilho = $("trilho");
+  const card = (f, i, copia) => `<figure class="foto" ${copia ? 'aria-hidden="true"' : 'tabindex="0" role="button"'} data-foto="${i}">
+      <img src="${f.src}" alt="${copia ? "" : "Beach tennis: " + esc(f.legenda)}" loading="lazy" decoding="async">
+      <figcaption>${esc(f.legenda)}</figcaption></figure>`;
+  fita.innerHTML = FOTOS.map((f, i) => card(f, i, false)).join("") + (calmo ? "" : FOTOS.map((f, i) => card(f, i, true)).join(""));
+
+  /* foto ampliada */
+  const abreFoto = (i) => {
+    $("foto-grande").src = FOTOS[i].src; $("foto-grande").alt = "Beach tennis: " + FOTOS[i].legenda;
+    $("foto-legenda").textContent = FOTOS[i].legenda; $("foto-dlg").showModal();
+  };
+  fita.addEventListener("click", (e) => { const f = e.target.closest("[data-foto]"); if (f && !arrastou) abreFoto(+f.dataset.foto); });
+  fita.addEventListener("keydown", (e) => { const f = e.target.closest("[data-foto]"); if (f && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); abreFoto(+f.dataset.foto); } });
+  $("foto-fechar").addEventListener("click", () => $("foto-dlg").close());
+  $("foto-dlg").addEventListener("click", (e) => { if (e.target === $("foto-dlg")) $("foto-dlg").close(); });
+
+  /* vídeo do topo: respeita quem prefere menos movimento e pausa fora da tela */
+  const video = $("hero-video");
+  if (calmo) { video.removeAttribute("autoplay"); video.pause(); }
+  else if ("IntersectionObserver" in window) {
+    new IntersectionObserver((es) => { const v = es[0].isIntersecting; if (v) video.play().catch(() => {}); else video.pause(); }).observe($("hero"));
+  }
+
+  /* faixa: texto entra quando aparece */
+  const faixa = $("faixa"), faixaImg = $("faixa-img");
+  if ("IntersectionObserver" in window && !calmo) {
+    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { faixa.classList.add("viu"); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(faixa);
+  } else faixa.classList.add("viu");
+
+  if (calmo) return;
+
+  /* fita de fotos: anda sozinha, acelera com a rolagem, pausa no mouse, dá para arrastar */
+  let x = 0, ultimoY = scrollY, impulso = 0, parado = false, arrastando = false, arrastou = false, px = 0, ant = performance.now();
+  if (matchMedia("(hover:hover)").matches) {
+    trilho.addEventListener("pointerenter", () => { parado = true; });
+    trilho.addEventListener("pointerleave", () => { parado = false; });
+  }
+  trilho.addEventListener("pointerdown", (e) => { arrastando = true; arrastou = false; px = e.clientX; });
+  addEventListener("pointermove", (e) => {
+    if (!arrastando) return;
+    const d = e.clientX - px; px = e.clientX;
+    if (Math.abs(d) > 2) arrastou = true;
+    x += d;
+  });
+  addEventListener("pointerup", () => { arrastando = false; setTimeout(() => { arrastou = false; }, 0); });
+
+  function anda(agora) {
+    requestAnimationFrame(anda);
+    const dt = Math.min(0.05, (agora - ant) / 1000); ant = agora;
+    const dy = scrollY - ultimoY; ultimoY = scrollY;
+    impulso += (dy * 14 - impulso) * 0.08;
+    const metade = fita.scrollWidth / 2;
+    if (!arrastando) x -= ((parado ? 0 : 38) + impulso) * dt;
+    if (metade > 0) { while (x <= -metade) x += metade; while (x > 0) x -= metade; }
+    fita.style.transform = `translateX(${x.toFixed(1)}px)`;
+
+    const r = faixa.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) {
+      const k = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      faixaImg.style.transform = `translateY(${(k * -22).toFixed(2)}%)`;
+    }
+  }
+  requestAnimationFrame(anda);
+})();
+
+})();
+</script>
+</body>
+</html>
